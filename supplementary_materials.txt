@@ -1,0 +1,81 @@
+SUPPLEMENTARY MATERIALS
+SST-2 Optimal Trees vs Transformers project
+============================================================
+
+1. FULL RULE LISTING: Hybrid feature set, depth 4 (16 rules, best-performing PySTREED tree)
+------------------------------------------------------------
+IF negation_count > 0.5 AND negative_words > 0.0 AND comma_count > 0.0 AND afinn_score > 1.0
+  THEN Positive
+
+IF negation_count > 0.5 AND negative_words > 0.0 AND comma_count > 0.0 AND afinn_score <= 1.0
+  THEN Negative
+
+IF negation_count > 0.5 AND negative_words > 0.0 AND comma_count <= 0.0 AND tfidf_film > 0.0
+  THEN Positive
+
+IF negation_count > 0.5 AND negative_words > 0.0 AND comma_count <= 0.0 AND tfidf_film <= 0.0
+  THEN Negative
+
+IF negation_count > 0.5 AND negative_words <= 0.0 AND afinn_score > 3.0 AND tfidf_funny > 0.0
+  THEN Negative
+
+IF negation_count > 0.5 AND negative_words <= 0.0 AND afinn_score > 3.0 AND tfidf_funny <= 0.0
+  THEN Positive
+
+IF negation_count > 0.5 AND negative_words <= 0.0 AND afinn_score <= 3.0 AND tfidf_only > 0.0
+  THEN Positive
+
+IF negation_count > 0.5 AND negative_words <= 0.0 AND afinn_score <= 3.0 AND tfidf_only <= 0.0
+  THEN Negative
+
+IF negation_count <= 0.5 AND afinn_score > -1.0 AND tfidf_like > 0.0 AND afinn_score > 3.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND afinn_score > -1.0 AND tfidf_like > 0.0 AND afinn_score <= 3.0
+  THEN Negative
+
+IF negation_count <= 0.5 AND afinn_score > -1.0 AND tfidf_like <= 0.0 AND tfidf_too > 0.0
+  THEN Negative
+
+IF negation_count <= 0.5 AND afinn_score > -1.0 AND tfidf_like <= 0.0 AND tfidf_too <= 0.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND afinn_score <= -1.0 AND tfidf_compelling > 0.0 AND adverb_count > 0.0
+  THEN Negative
+
+IF negation_count <= 0.5 AND afinn_score <= -1.0 AND tfidf_compelling > 0.0 AND adverb_count <= 0.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND afinn_score <= -1.0 AND tfidf_compelling <= 0.0 AND tfidf_human > 0.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND afinn_score <= -1.0 AND tfidf_compelling <= 0.0 AND tfidf_human <= 0.0
+  THEN Negative
+
+2. FULL RULE LISTING: Linguistic feature set, depth 3 (8 rules, cleanest tree)
+------------------------------------------------------------
+IF negation_count > 0.5 AND sentence_length > 18.0 AND afinn_score > 1.0
+  THEN Positive
+
+IF negation_count > 0.5 AND sentence_length > 18.0 AND afinn_score <= 1.0
+  THEN Negative
+
+IF negation_count > 0.5 AND sentence_length <= 18.0 AND NOT (exclamation_marks)
+  THEN Negative
+
+IF negation_count > 0.5 AND sentence_length <= 18.0 AND exclamation_marks
+  THEN Positive
+
+IF negation_count <= 0.5 AND intensifier_count > 0.5 AND afinn_score > 0.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND intensifier_count > 0.5 AND afinn_score <= 0.0
+  THEN Negative
+
+IF negation_count <= 0.5 AND intensifier_count <= 0.5 AND afinn_score > -1.0
+  THEN Positive
+
+IF negation_count <= 0.5 AND intensifier_count <= 0.5 AND afinn_score <= -1.0
+  THEN Negative
+
+3. Full PySTREED results across all feature sets and depths: see supplementary_pystreed_full_results.csv
